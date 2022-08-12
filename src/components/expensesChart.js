@@ -6,7 +6,7 @@ const barMaxHeight = 200;
 const heightOfSibling = 28;
 
 export default function ExpensesChart({ data }) {
-  const [maxEarnings, setMaxEarnings] = useState(0);
+  const [sumEarnings, setSumEarnings] = useState(0);
   const [maxNumber, setMaxNumber] = useState(0);
   const [maxBarHeight, setMaxBarHeight] = useState(0);
   const [active, setActive] = useState("0");
@@ -25,7 +25,7 @@ export default function ExpensesChart({ data }) {
 
   
   useEffect(() => {
-    setMaxEarnings(sum(data));
+    setSumEarnings(sum(data));
     setMaxNumber(max(data));
     setMaxBarHeight(convert(maxNumber));
   }, [data, maxNumber, maxBarHeight]);
@@ -47,7 +47,7 @@ export default function ExpensesChart({ data }) {
 
               {active===index && <span className="absolute -top-7 -right-2 md:-top-8 text-xs md:text-sm text-white font-bold bg-black rounded-md p-1">${item.amount}</span>}
 
-              <div style={{ height: `${item.amount/maxBarHeight*barMaxHeight - heightOfSibling}px` }} className="bg-hslSoftRed rounded-sm"></div>
+              <div style={{ height: `${item.amount/maxBarHeight*barMaxHeight - heightOfSibling}px` }} className="bg-hslSoftRed rounded-sm hover:bg-hslCyan"></div>
               <p className="text-sm text-hslMediumBrown text-center mt-2">{item.day}</p>
             </div>
           ))}
